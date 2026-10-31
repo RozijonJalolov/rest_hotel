@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Sayohat — Sam Rest Hostel</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .video-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(230, 57, 70, 0.9);
+            color: #fff;
+            padding: 0.35rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+            z-index: 3;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .video-badge.gold {
+            background: rgba(212, 175, 55, 0.95);
+            color: #0b0f19;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+        }
+        .video-badge.blue {
+            background: rgba(0, 136, 204, 0.95);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
+        }
+        .video-poster-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #000;
+            display: block;
+            cursor: pointer;
+        }
+        .video-poster-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .video-poster-box:hover img {
+            transform: scale(1.05);
+        }
+        .play-overlay-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: rgba(230, 57, 70, 0.9);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.8rem;
+            box-shadow: 0 0 30px rgba(230, 57, 70, 0.8);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        .video-poster-box:hover .play-overlay-btn {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: var(--primary);
+            box-shadow: 0 0 40px rgba(230, 57, 70, 1);
+        }
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .reel-card {
+            background: rgba(26, 32, 48, 0.7);
+            border: 1px solid rgba(225, 48, 108, 0.3);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .reel-card:hover {
+            border-color: rgba(225, 48, 108, 0.8);
+            transform: translateY(-3px);
+            background: rgba(26, 32, 48, 0.95);
+        }
+        .reel-thumb {
+            width: 80px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .reel-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .reel-thumb::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1rem;
+            background: rgba(0,0,0,0.5);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="navbar">
+        <a href="/" class="logo">
+            <div class="logo-badge">REST</div>
+            <div class="logo-text">
+                <span>SAM REST</span>
+                <span>HOSTEL</span>
+            </div>
+        </a>
+        
+        <nav class="desktop-nav">
+            <a href="/" class="nav-link">Bosh sahifa</a>
+            <a href="/about" class="nav-link">Biz haqimizda</a>
+            <a href="/videos" class="nav-link active">Video Sayohat</a>
+            <a href="/rooms" class="nav-link">Xonalar</a>
+            <a href="/rules" class="nav-link">Qoidalar</a>
+            <a href="/contact" class="nav-link">Aloqa</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.63 3.73-.53.36-1.02.54-1.45.53-.48-.01-1.4-.27-2.08-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.1.67 1.83.69 2.12.02.04.02.09.01.12z"/>
+                </svg>
+                <span>Telegram Bot</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menyu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Backdrop -->
+    <div class="mobile-drawer-backdrop" id="mobileBackdrop"></div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="logo">
+                <div class="logo-badge">REST</div>
+                <div class="logo-text">
+                    <span>SAM REST</span>
+                    <span>HOSTEL</span>
+                </div>
+            </div>
+            <button class="mobile-drawer-close" id="drawerClose">&times;</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="/" class="mobile-link">🏠 Bosh sahifa</a>
+            <a href="/about" class="mobile-link">🏨 Biz haqimizda</a>
+            <a href="/videos" class="mobile-link active">🎬 Video Sayohat</a>
+            <a href="/rooms" class="mobile-link">🛏 Xonalar va Narxlar</a>
+            <a href="/rules" class="mobile-link">📋 Tartib-Qoidalar</a>
+            <a href="/contact" class="mobile-link">📍 Manzil va Aloqa</a>
+        </div>
+        <div class="mobile-drawer-footer">
+            <a href="tel:+998880110055" class="mobile-phone-btn">
+                📞 +998 88 011 00 55
+            </a>
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram" style="width: 100%; justify-content: center; padding: 0.8rem;">
+                🤖 Telegram Botda bron
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Hero Banner -->
+    <section class="page-hero">
+        <span class="page-hero-tag">Jonli Video & Sayohat</span>
+        <h1 class="page-hero-title">Video Sayohat</h1>
+        <p class="page-hero-subtitle">
+            Sam Rest mehmonxonasi boʻylab toʻliq video sharh, xonalarimiz va shinam sharoitlar bilan oʻz koʻzingiz bilan tanishing
+        </p>
+    </section>
+
+    <!-- Video Showcase Grid -->
+    <section class="section">
+        <div class="section-header">
+            <span class="section-tag">Eksklyuziv Videolar</span>
+            <h2>Mehmonxonamiz Videolari</h2>
+            <p>Sam Rest mehmonxonasi xonalari, qabulxona, 3D brending va joylashuv videolari</p>
+        </div>
+
+        <div class="video-grid">
+            <!-- Video 1: Asosiy Mehmonxona Sayohati (Real User MP4) -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <span class="video-badge">🔴 Asosiy Video Sayohat</span>
+                    <video id="mainHotelVideo" controls playsinline webkit-playsinline preload="auto" poster="/static/images/exterior_night.jpg">
+                        <source src="/static/videos/hotel_tour.mp4" type="video/mp4">
+                        Brauzeringiz video formatini qoʻllab-quvvatlamaydi.
+                    </video>
+                </div>
+                <div class="video-card-body">
+                    <h3 class="video-card-title">✨ Sam Rest Mehmonxonasi Toʻliq Sayohati</h3>
+                    <p class="video-card-desc">
+                        Mehmonxonaning tashqi fasadi, qabulxona, yotoqlar, ichki ozodalik va zamonaviy xonalarning haqiqiy video koʻrinishi.
+                    </p>
+                    <div style="margin-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;">
+                        <span style="color: #2ec4b6; font-weight: 700; font-size: 0.9rem;">▶ Jonli tomosha</span>
+                        <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-room-book" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Telegramda bron qilish</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 2: 3D Brending va Xonalar (CapCut 3D Visual) -->
+            <div class="video-card" id="video-card-logo">
+                <div class="video-wrapper">
+                    <span class="video-badge gold">🏆 CapCut 3D Brending</span>
+                    <div class="video-poster-box" onclick="playOrModalVideo()">
+                        <img src="/static/images/capcut_logo_3d.png" alt="Sam Rest Hotel CapCut 3D Brending">
+                        <div class="play-overlay-btn">▶</div>
+                    </div>
+                </div>
+                <div class="video-card-body">
+                    <h3 class="video-card-title">🏆 Sam Rest Hotel 3D Rasmiy Taqdimot</h3>
+                    <p class="video-card-desc">
+                        CapCut 3D oltin gerb logotipi va Sam Rest Hostel brending roligi hamda mehmonxonamizning xizmat koʻrsatish formati.
+                    </p>
+                    <div style="margin-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;">
+                        <a href="https://www.instagram.com/sam_rest_hotel/" target="_blank" style="color: #e1306c; font-weight: 700; font-size: 0.9rem; text-decoration: none;">
+                            📸 Instagramda koʻrish →
+                        </a>
+                        <a href="/rooms" class="btn-room-book" style="padding: 0.5rem 1.2rem; font-size: 0.85rem; background: rgba(255,255,255,0.1); border: 1px solid var(--border-glass);">Xonalarni koʻrish</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 3: 3D Manzil va Samarqand Xaritasi (CapCut Map 3D Visual) -->
+            <div class="video-card" id="video-card-map">
+                <div class="video-wrapper">
+                    <span class="video-badge blue">📍 3D Manzil & Xarita</span>
+                    <a href="/contact" class="video-poster-box">
+                        <img src="/static/images/capcut_map_3d.jpg" alt="Samarqand Shohi Zinda Manzil 3D Xaritasi">
+                        <div class="play-overlay-btn" style="background: rgba(0, 136, 204, 0.9); box-shadow: 0 0 30px rgba(0, 136, 204, 0.8);">📍</div>
+                    </a>
+                </div>
+                <div class="video-card-body">
+                    <h3 class="video-card-title">📍 Samarqand Shohi Zinda & Joylashuv 3D</h3>
+                    <p class="video-card-desc">
+                        Sam Rest mehmonxonasining Samarqand shahri Shohi Zinda koʻchasi (BURHAN oshi yonida) qulay va xavfsiz joylashuvi.
+                    </p>
+                    <div style="margin-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;">
+                        <a href="https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand" target="_blank" style="color: #4da6ff; font-weight: 700; font-size: 0.9rem; text-decoration: none;">
+                            🗺 Xaritani ochish →
+                        </a>
+                        <a href="tel:+998880110055" class="btn-room-book" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">📞 Qoʻngʻiroq qilish</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Reels & Roliklar Bo'limi -->
+        <div style="margin-top: 4rem;">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <span class="section-tag" style="color: #e1306c;">Instagram Roliklar</span>
+                <h3 style="font-size: 2rem; font-weight: 800; color: #fff;">@sam_rest_hotel Instagram Roliklari</h3>
+                <p>Rasmiy Instagram sahifamizdagi eng soʻnggi video nashrlar va sharhlar</p>
+            </div>
+
+            <div class="reels-grid">
+                <!-- Reel 1 -->
+                <a href="https://www.instagram.com/sam_rest_hotel/" target="_blank" class="reel-card" style="text-decoration: none;">
+                    <div class="reel-thumb">
+                        <img src="/static/images/exterior_night.jpg" alt="Mehmonxona hovlisi roligi">
+                    </div>
+                    <div>
+                        <div style="color: #e1306c; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">1-Rolik • Video</div>
+                        <h4 style="color: #fff; font-size: 1rem; margin: 0.3rem 0;">Kimga SAMARQAND da shinam va yangi ochilgan toza mehmonxona kerak...</h4>
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Instagramda tomosha qilish &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Reel 2 -->
+                <a href="https://www.instagram.com/sam_rest_hotel/" target="_blank" class="reel-card" style="text-decoration: none;">
+                    <div class="reel-thumb">
+                        <img src="/static/images/room_beds.png" alt="Mehmonxona xonalari roligi">
+                    </div>
+                    <div>
+                        <div style="color: #e1306c; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">2-Rolik • Video</div>
+                        <h4 style="color: #fff; font-size: 1rem; margin: 0.3rem 0;">+998(88)011-00-55 Adres: Samarqand Ulugʻbek Shohi Zinda</h4>
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Instagramda tomosha qilish &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Instagram Profile Showcase Box -->
+        <div class="instagram-box">
+            <div class="instagram-info">
+                <img src="/static/images/logo_gold.png" style="width: 75px; height: 75px; border-radius: 50%; object-fit: cover; border: 2px solid #e1306c; box-shadow: 0 0 20px rgba(225, 48, 108, 0.5);" alt="Sam Rest Hotel Instagram">
+                <div class="instagram-text">
+                    <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span>sam_rest_hotel</span>
+                        <span style="background: rgba(225,48,108,0.2); color: #ff8787; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 50px; font-weight: 700;">Rasmiy Profil</span>
+                    </h3>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; margin-top: 0.2rem;">
+                        <b>Samarqand mehmonxona</b> • Juda qulay, shinam va arzon narxlarda xizmat koʻrsatamiz 😊
+                    </p>
+                    <p style="color: var(--text-dim); font-size: 0.85rem; margin-top: 0.3rem;">
+                        📍 Samarqand, Shohi Zinda • 📞 +998 88 011 00 55
+                    </p>
+                </div>
+            </div>
+
+            <a href="https://www.instagram.com/sam_rest_hotel/" target="_blank" id="insta-link" class="btn-instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                <span>Instagram Sahifasiga oʻtish</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <strong>Sam Rest Hostel</strong> (Sam Rest Mehmonxonasi). Barcha huquqlar himoyalangan.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-dim);">
+            Samarqand shahri, Shohi Zinda koʻchasi • Tel: +998 88 011 00 55
+        </p>
+    </footer>
+
+    <!-- Video Modal for full screen review -->
+    <div id="videoModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem;">
+        <div style="position: relative; max-width: 900px; width: 100%;">
+            <button onclick="closeVideoModal()" style="position: absolute; -top: 40px; right: 0; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer;">&times;</button>
+            <video id="modalVideoPlayer" controls playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 0 50px rgba(0,0,0,0.8);">
+                <source src="/static/videos/hotel_tour.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <script>
+        function playOrModalVideo() {
+            const vid = document.getElementById('mainHotelVideo');
+            if (vid) {
+                vid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                vid.play();
+            }
+        }
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('modalVideoPlayer');
+            if (modal) modal.style.display = 'none';
+            if (player) player.pause();
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+    
+    <!-- Mobile Floating Bottom Bar -->
+    <div class="mobile-bottom-bar">
+        <a href="tel:+998880110055" class="bottom-bar-btn call">
+            <span class="icon">📞</span>
+            <span>Qoʻngʻiroq</span>
+        </a>
+        <a href="/rooms" class="bottom-bar-btn rooms">
+            <span class="icon">🛏</span>
+            <span>Xonalar</span>
+        </a>
+        <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="bottom-bar-btn tg">
+            <span class="icon">🤖</span>
+            <span>Telegram</span>
+        </a>
+    </div>
+
+    <script src="/static/js/mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloqa va Manzil — Sam Rest Hostel</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="navbar">
+        <a href="/" class="logo">
+            <div class="logo-badge">REST</div>
+            <div class="logo-text">
+                <span>SAM REST</span>
+                <span>HOSTEL</span>
+            </div>
+        </a>
+        
+        <nav class="desktop-nav">
+            <a href="/" class="nav-link">Bosh sahifa</a>
+            <a href="/about" class="nav-link">Biz haqimizda</a>
+            <a href="/videos" class="nav-link">Video Sayohat</a>
+            <a href="/rooms" class="nav-link">Xonalar</a>
+            <a href="/rules" class="nav-link">Qoidalar</a>
+            <a href="/contact" class="nav-link active">Aloqa</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.63 3.73-.53.36-1.02.54-1.45.53-.48-.01-1.4-.27-2.08-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.1.67 1.83.69 2.12.02.04.02.09.01.12z"/>
+                </svg>
+                <span>Telegram Bot</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menyu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Backdrop -->
+    <div class="mobile-drawer-backdrop" id="mobileBackdrop"></div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="logo">
+                <div class="logo-badge">REST</div>
+                <div class="logo-text">
+                    <span>SAM REST</span>
+                    <span>HOSTEL</span>
+                </div>
+            </div>
+            <button class="mobile-drawer-close" id="drawerClose">&times;</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="/" class="mobile-link">🏠 Bosh sahifa</a>
+            <a href="/about" class="mobile-link">🏨 Biz haqimizda</a>
+            <a href="/videos" class="mobile-link">🎬 Video Sayohat</a>
+            <a href="/rooms" class="mobile-link">🛏 Xonalar va Narxlar</a>
+            <a href="/rules" class="mobile-link">📋 Tartib-Qoidalar</a>
+            <a href="/contact" class="mobile-link active">📍 Manzil va Aloqa</a>
+        </div>
+        <div class="mobile-drawer-footer">
+            <a href="tel:+998880110055" class="mobile-phone-btn">
+                📞 +998 88 011 00 55
+            </a>
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram" style="width: 100%; justify-content: center; padding: 0.8rem;">
+                🤖 Telegram Botda bron
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Hero Banner -->
+    <section class="page-hero">
+        <span class="page-hero-tag">Bogʻlanish</span>
+        <h1 class="page-hero-title">Manzil va Aloqa</h1>
+        <p class="page-hero-subtitle">
+            Biz bilan 24/7 bogʻlanishingiz, xonalarni bron qilishingiz va xaritadan manzilimizni aniqlashingiz mumkin
+        </p>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section class="section">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <div class="info-details">
+                        <h4>Mehmonxona Manzili</h4>
+                        <p>Samarqand shahri, Shohi Zinda koʻchasi (BURHAN oshi yonida)</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand" target="_blank" style="color: var(--primary); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: inline-block; margin-top: 0.5rem;">
+                            📍 Google Xaritada koʻrish va yoʻnalish olish ↗
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <div class="info-details">
+                        <h4>Bron Qilish Uchun Telefon</h4>
+                        <a href="tel:+998880110055" class="phone-link">+998 88 011 00 55</a>
+                        <p style="margin-top: 0.3rem;">Kechayu kunduz qoʻngʻiroq qilishingiz mumkin (24/7 ochiq)</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🕒</div>
+                    <div class="info-details">
+                        <h4>Ish Vaqti va Qabul</h4>
+                        <p>Kirish (Check-in): <b>14:00 dan boshlab</b></p>
+                        <p>Chiqish (Check-out): <b>12:00 gacha</b></p>
+                        <p>Qabulxona (Reception): <b>24 soat uzluksiz</b></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🤖</div>
+                    <div class="info-details">
+                        <h4>Rasmiy Telegram Bot</h4>
+                        <p>Bir zumda xonalarni koʻrish va fotosurat orqali bron qilish:</p>
+                        <a href="https://t.me/Sam_rest_hotelbot" target="_blank" style="color: #229ed9; font-weight: 700; text-decoration: none; font-size: 1.1rem; display: inline-block; margin-top: 0.4rem;">
+                            @Sam_rest_hotelbot ↗
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon" style="background: rgba(225, 48, 108, 0.15); border-color: rgba(225, 48, 108, 0.4);">📸</div>
+                    <div class="info-details">
+                        <h4>Instagram Sahifamiz</h4>
+                        <p>Rasmiy yangiliklar va video sharhlar:</p>
+                        <a href="https://www.instagram.com/sam_rest_hotel/" target="_blank" style="color: #e1306c; font-weight: 700; text-decoration: none; font-size: 1.1rem; display: inline-block; margin-top: 0.4rem;">
+                            @sam_rest_hotel ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Map Wrapper -->
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://maps.google.com/maps?q=SAM+REST+HOTEL,+Samarkand&hl=uz&z=17&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <strong>Sam Rest Hostel</strong> (Sam Rest Mehmonxonasi). Barcha huquqlar himoyalangan.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-dim);">
+            Samarqand shahri, Shohi Zinda koʻchasi • Tel: +998 88 011 00 55
+        </p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <!-- Mobile Floating Bottom Bar -->
+    <div class="mobile-bottom-bar">
+        <a href="tel:+998880110055" class="bottom-bar-btn call">
+            <span class="icon">📞</span>
+            <span>Qoʻngʻiroq</span>
+        </a>
+        <a href="/rooms" class="bottom-bar-btn rooms">
+            <span class="icon">🛏</span>
+            <span>Xonalar</span>
+        </a>
+        <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="bottom-bar-btn tg">
+            <span class="icon">🤖</span>
+            <span>Telegram</span>
+        </a>
+    </div>
+
+    <script src="/static/js/mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xonalar va Narxlar — Sam Rest Hostel</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="navbar">
+        <a href="/" class="logo">
+            <div class="logo-badge">REST</div>
+            <div class="logo-text">
+                <span>SAM REST</span>
+                <span>HOSTEL</span>
+            </div>
+        </a>
+        
+        <nav class="desktop-nav">
+            <a href="/" class="nav-link">Bosh sahifa</a>
+            <a href="/about" class="nav-link">Biz haqimizda</a>
+            <a href="/videos" class="nav-link">Video Sayohat</a>
+            <a href="/rooms" class="nav-link active">Xonalar</a>
+            <a href="/rules" class="nav-link">Qoidalar</a>
+            <a href="/contact" class="nav-link">Aloqa</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.63 3.73-.53.36-1.02.54-1.45.53-.48-.01-1.4-.27-2.08-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.1.67 1.83.69 2.12.02.04.02.09.01.12z"/>
+                </svg>
+                <span>Telegram Bot</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menyu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Backdrop -->
+    <div class="mobile-drawer-backdrop" id="mobileBackdrop"></div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="logo">
+                <div class="logo-badge">REST</div>
+                <div class="logo-text">
+                    <span>SAM REST</span>
+                    <span>HOSTEL</span>
+                </div>
+            </div>
+            <button class="mobile-drawer-close" id="drawerClose">&times;</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="/" class="mobile-link">🏠 Bosh sahifa</a>
+            <a href="/about" class="mobile-link">🏨 Biz haqimizda</a>
+            <a href="/videos" class="mobile-link">🎬 Video Sayohat</a>
+            <a href="/rooms" class="mobile-link active">🛏 Xonalar va Narxlar</a>
+            <a href="/rules" class="mobile-link">📋 Tartib-Qoidalar</a>
+            <a href="/contact" class="mobile-link">📍 Manzil va Aloqa</a>
+        </div>
+        <div class="mobile-drawer-footer">
+            <a href="tel:+998880110055" class="mobile-phone-btn">
+                📞 +998 88 011 00 55
+            </a>
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram" style="width: 100%; justify-content: center; padding: 0.8rem;">
+                🤖 Telegram Botda bron
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Hero Banner -->
+    <section class="page-hero">
+        <span class="page-hero-tag">Shinam va Qulay</span>
+        <h1 class="page-hero-title">Bizning Shinam Xonalar</h1>
+        <p class="page-hero-subtitle">
+            Har bir xonada alohida shaxsiy dush, Smart TV, konditsioner va Wi-Fi mavjud. Narxlar kelishiladi va arzonlashtirib beriladi!
+        </p>
+
+        <!-- Quick Interactive Booking Bar -->
+        <div class="quick-booking-bar" style="margin: 2.5rem auto 0;">
+            <div class="booking-field">
+                <label>Xona turi</label>
+                <select id="quick-room">
+                    <option value="double_room_1" data-price="400000">2 kishilik xona №1 (400 000 soʻm)</option>
+                    <option value="double_room_2" data-price="400000">2 kishilik xona №2 (400 000 soʻm)</option>
+                    <option value="triple_room" data-price="500000">3 kishilik xona (500 000 soʻm)</option>
+                </select>
+            </div>
+
+            <div class="booking-field">
+                <label>Kirish sanasi</label>
+                <input type="date" id="quick-checkin">
+            </div>
+
+            <div class="booking-field">
+                <label>Kechalar soni</label>
+                <select id="quick-nights">
+                    <option value="1">1 kecha</option>
+                    <option value="2">2 kecha</option>
+                    <option value="3">3 kecha</option>
+                    <option value="4">4 kecha</option>
+                    <option value="5">5 kecha</option>
+                    <option value="7">1 hafta</option>
+                </select>
+            </div>
+
+            <div class="booking-field">
+                <label>Taxminiy narx</label>
+                <div id="quick-total" style="display: flex; align-items: center; justify-content: center; height: 44px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-sm); font-size: 1.05rem; font-weight: 800; color: #10b981; font-family: 'Outfit'; padding: 0 0.8rem;">
+                    400 000 soʻm
+                </div>
+            </div>
+
+            <button class="btn-calc-book" onclick="redirectToBooking()">
+                <span>Bron qilish</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Rooms List Section -->
+    <section class="section">
+        <div class="rooms-grid">
+            
+            <!-- Room 1 -->
+            <div class="room-card">
+                <div class="badge-capacity">👤 2 kishi</div>
+                <div class="badge-negotiable">🤝 Kelishiladi</div>
+
+                <!-- Carousel 1 -->
+                <div class="room-slider" id="slider-1">
+                    <div class="room-slider-track">
+                        <img src="/static/images/room_beds.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №1 yotoqlar">
+                        <img src="/static/images/room_tv.jpg" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №1 TV va deraza">
+                        <img src="/static/images/bathroom.jpg" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №1 dush xonasi">
+                        <img src="/static/images/room_full.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №1 toʻliq koʻrinish">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide('slider-1', -1)">‹</button>
+                    <button class="slider-btn next" onclick="moveSlide('slider-1', 1)">›</button>
+                    <div class="slider-dots">
+                        <span class="slider-dot active" onclick="setSlide('slider-1', 0)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-1', 1)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-1', 2)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-1', 3)"></span>
+                    </div>
+                </div>
+
+                <div class="room-body">
+                    <h3 class="room-title">2 Kishilik Shinam Xona (№1)</h3>
+                    <p class="room-desc">
+                        Alohida qulay yotoqlar, toza choyshablar, zamonaviy konditsioner, Smart TV va alohida dush xonasi. Narxi kelishiladi va arzonlashtirib beriladi!
+                    </p>
+
+                    <div class="amenities">
+                        <span class="amenity-chip">📶 Wi-Fi</span>
+                        <span class="amenity-chip">❄️ Konditsioner</span>
+                        <span class="amenity-chip">📺 Smart TV</span>
+                        <span class="amenity-chip">🚿 Shaxsiy Dush</span>
+                    </div>
+
+                    <div class="room-footer">
+                        <div class="price-container">
+                            <div class="price-val">400 000 <span>soʻm / kecha</span></div>
+                            <div class="price-sub">🤝 Kelishiladi (arzonlashtiramiz)</div>
+                        </div>
+                        <a href="https://t.me/Sam_rest_hotelbot?start=room_double_room_1" target="_blank" class="btn-room-book">
+                            <span>Bron qilish</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 2 -->
+            <div class="room-card">
+                <div class="badge-capacity">👤 2 kishi</div>
+                <div class="badge-negotiable">🤝 Kelishiladi</div>
+
+                <!-- Carousel 2 -->
+                <div class="room-slider" id="slider-2">
+                    <div class="room-slider-track">
+                        <img src="/static/images/room2_beds.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №2 yotoqlar">
+                        <img src="/static/images/room2_view.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №2 yotoq va chiroqlar">
+                        <img src="/static/images/room2_tv.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №2 TV va konditsioner">
+                        <img src="/static/images/room2_bathroom.jpg" class="room-slide-img" onclick="openLightbox(this.src)" alt="2 kishilik xona №2 dush xonasi">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide('slider-2', -1)">‹</button>
+                    <button class="slider-btn next" onclick="moveSlide('slider-2', 1)">›</button>
+                    <div class="slider-dots">
+                        <span class="slider-dot active" onclick="setSlide('slider-2', 0)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-2', 1)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-2', 2)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-2', 3)"></span>
+                    </div>
+                </div>
+
+                <div class="room-body">
+                    <h3 class="room-title">2 Kishilik Shinam Xona (№2)</h3>
+                    <p class="room-desc">
+                        Keng va sokin xona, zamonaviy devor yoritgichlari, yangi qulay matraslar va toza dush xonasi. Narxi kelishiladi va arzonlashtirib beriladi!
+                    </p>
+
+                    <div class="amenities">
+                        <span class="amenity-chip">📶 Wi-Fi</span>
+                        <span class="amenity-chip">❄️ Konditsioner</span>
+                        <span class="amenity-chip">📺 Smart TV</span>
+                        <span class="amenity-chip">🚿 Shaxsiy Dush</span>
+                    </div>
+
+                    <div class="room-footer">
+                        <div class="price-container">
+                            <div class="price-val">400 000 <span>soʻm / kecha</span></div>
+                            <div class="price-sub">🤝 Kelishiladi (arzonlashtiramiz)</div>
+                        </div>
+                        <a href="https://t.me/Sam_rest_hotelbot?start=room_double_room_2" target="_blank" class="btn-room-book">
+                            <span>Bron qilish</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3 -->
+            <div class="room-card">
+                <div class="badge-capacity">👤 3 kishi (Oilaviy)</div>
+                <div class="badge-negotiable">🤝 Kelishiladi</div>
+
+                <!-- Carousel 3 -->
+                <div class="room-slider" id="slider-3">
+                    <div class="room-slider-track">
+                        <img src="/static/images/room3_beds.jpg" class="room-slide-img" onclick="openLightbox(this.src)" alt="3 kishilik xona yotoqlar">
+                        <img src="/static/images/room3_full.jpg" class="room-slide-img" onclick="openLightbox(this.src)" alt="3 kishilik xona toʻliq koʻrinish">
+                        <img src="/static/images/room3_wardrobe.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="3 kishilik xona qulayliklar">
+                        <img src="/static/images/room3_bathroom.png" class="room-slide-img" onclick="openLightbox(this.src)" alt="3 kishilik xona zamonaviy dush">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide('slider-3', -1)">‹</button>
+                    <button class="slider-btn next" onclick="moveSlide('slider-3', 1)">›</button>
+                    <div class="slider-dots">
+                        <span class="slider-dot active" onclick="setSlide('slider-3', 0)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-3', 1)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-3', 2)"></span>
+                        <span class="slider-dot" onclick="setSlide('slider-3', 3)"></span>
+                    </div>
+                </div>
+
+                <div class="room-body">
+                    <h3 class="room-title">3 Kishilik Keng Xona</h3>
+                    <p class="room-desc">
+                        Katta va qulay oilaviy xona. 3 ta alohida toza yotoq, katta kiyim javoni, yangi santexnika va fen. Narxi kelishiladi va arzonlashtirib beriladi!
+                    </p>
+
+                    <div class="amenities">
+                        <span class="amenity-chip">👤 3 kishilik</span>
+                        <span class="amenity-chip">📶 Wi-Fi</span>
+                        <span class="amenity-chip">❄️ Konditsioner</span>
+                        <span class="amenity-chip">🚿 Shaxsiy Dush</span>
+                    </div>
+
+                    <div class="room-footer">
+                        <div class="price-container">
+                            <div class="price-val">500 000 <span>soʻm / kecha</span></div>
+                            <div class="price-sub">🤝 Kelishiladi (arzonlashtiramiz)</div>
+                        </div>
+                        <a href="https://t.me/Sam_rest_hotelbot?start=room_triple_room" target="_blank" class="btn-room-book">
+                            <span>Bron qilish</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <strong>Sam Rest Hostel</strong> (Sam Rest Mehmonxonasi). Barcha huquqlar himoyalangan.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-dim);">
+            Samarqand shahri, Shohi Zinda koʻchasi • Tel: +998 88 011 00 55
+        </p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox(null)">&times;</button>
+            <img id="lightboxImg" src="" alt="Koʻrish">
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const sliders = {
+            'slider-1': { index: 0, count: 4 },
+            'slider-2': { index: 0, count: 4 },
+            'slider-3': { index: 0, count: 4 },
+        };
+
+        function moveSlide(sliderId, dir) {
+            const slider = sliders[sliderId];
+            if (!slider) return;
+            slider.index = (slider.index + dir + slider.count) % slider.count;
+            updateSlider(sliderId);
+        }
+
+        function setSlide(sliderId, idx) {
+            const slider = sliders[sliderId];
+            if (!slider) return;
+            slider.index = idx;
+            updateSlider(sliderId);
+        }
+
+        function updateSlider(sliderId) {
+            const slider = sliders[sliderId];
+            const el = document.getElementById(sliderId);
+            if (!el) return;
+            const track = el.querySelector('.room-slider-track');
+            const dots = el.querySelectorAll('.slider-dot');
+            
+            track.style.transform = `translateX(-${slider.index * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === slider.index);
+            });
+        }
+
+        const modal = document.getElementById('lightboxModal');
+        const modalImg = document.getElementById('lightboxImg');
+
+        function openLightbox(src) {
+            modalImg.src = src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (!e || e.target === modal || e.target.classList.contains('lightbox-close')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        // Quick Booking Calculator
+        const roomSelect = document.getElementById('quick-room');
+        const nightsSelect = document.getElementById('quick-nights');
+        const checkinInput = document.getElementById('quick-checkin');
+        const totalDisplay = document.getElementById('quick-total');
+
+        const today = new Date().toISOString().split('T')[0];
+        checkinInput.value = today;
+        checkinInput.min = today;
+
+        function updateQuickTotal() {
+            const selectedOpt = roomSelect.options[roomSelect.selectedIndex];
+            const price = parseInt(selectedOpt.getAttribute('data-price') || '400000', 10);
+            const nights = parseInt(nightsSelect.value, 10);
+            const total = price * nights;
+            totalDisplay.textContent = total.toLocaleString('uz-UZ') + " soʻm";
+        }
+
+        roomSelect.addEventListener('change', updateQuickTotal);
+        nightsSelect.addEventListener('change', updateQuickTotal);
+
+        function redirectToBooking() {
+            const roomKey = roomSelect.value;
+            const checkinVal = checkinInput.value.replace(/-/g, '');
+            const nights = nightsSelect.value;
+            const botUrl = `https://t.me/Sam_rest_hotelbot?start=b_${roomKey}_${checkinVal}_${nights}`;
+            window.open(botUrl, '_blank');
+        }
+    </script>
+    <!-- Mobile Floating Bottom Bar -->
+    <div class="mobile-bottom-bar">
+        <a href="tel:+998880110055" class="bottom-bar-btn call">
+            <span class="icon">📞</span>
+            <span>Qoʻngʻiroq</span>
+        </a>
+        <a href="/rooms" class="bottom-bar-btn rooms">
+            <span class="icon">🛏</span>
+            <span>Xonalar</span>
+        </a>
+        <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="bottom-bar-btn tg">
+            <span class="icon">🤖</span>
+            <span>Telegram</span>
+        </a>
+    </div>
+
+    <script src="/static/js/mobile.js"></script>
+</body>
+</html>

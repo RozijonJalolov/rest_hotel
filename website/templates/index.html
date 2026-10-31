@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Rest Hostel — Samarqanddagi Shinam va Zamonaviy Mehmonxona</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        /* Dedicated Fullscreen Cinematic Home Layout */
+        body.home-page {
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 0;
+        }
+
+        .home-hero {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        .home-footer {
+            position: relative;
+            z-index: 10;
+            background: rgba(10, 12, 16, 0.75);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-glass);
+            padding: 1rem 2rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            body.home-page {
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
+                padding-bottom: 75px;
+            }
+            .home-hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="home-page">
+
+    <!-- Header Navigation -->
+    <header id="navbar">
+        <a href="/" class="logo">
+            <div class="logo-badge">REST</div>
+            <div class="logo-text">
+                <span>SAM REST</span>
+                <span>HOSTEL</span>
+            </div>
+        </a>
+        
+        <nav class="desktop-nav">
+            <a href="/" class="nav-link active">Bosh sahifa</a>
+            <a href="/about" class="nav-link">Biz haqimizda</a>
+            <a href="/videos" class="nav-link">Video Sayohat</a>
+            <a href="/rooms" class="nav-link">Xonalar</a>
+            <a href="/rules" class="nav-link">Qoidalar</a>
+            <a href="/contact" class="nav-link">Aloqa</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.63 3.73-.53.36-1.02.54-1.45.53-.48-.01-1.4-.27-2.08-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.51 1.07-.78 4.2-1.82 7-3.03 8.4-3.61 4-.1.67 1.83.69 2.12.02.04.02.09.01.12z"/>
+                </svg>
+                <span>Telegram Bot</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menyu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Backdrop -->
+    <div class="mobile-drawer-backdrop" id="mobileBackdrop"></div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="mobile-drawer-header">
+            <div class="logo">
+                <div class="logo-badge">REST</div>
+                <div class="logo-text">
+                    <span>SAM REST</span>
+                    <span>HOSTEL</span>
+                </div>
+            </div>
+            <button class="mobile-drawer-close" id="drawerClose">&times;</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="/" class="mobile-link active">🏠 Bosh sahifa</a>
+            <a href="/about" class="mobile-link">🏨 Biz haqimizda</a>
+            <a href="/videos" class="mobile-link">🎬 Video Sayohat</a>
+            <a href="/rooms" class="mobile-link">🛏 Xonalar va Narxlar</a>
+            <a href="/rules" class="mobile-link">📋 Tartib-Qoidalar</a>
+            <a href="/contact" class="mobile-link">📍 Manzil va Aloqa</a>
+        </div>
+        <div class="mobile-drawer-footer">
+            <a href="tel:+998880110055" class="mobile-phone-btn">
+                📞 +998 88 011 00 55
+            </a>
+            <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="btn-telegram" style="width: 100%; justify-content: center; padding: 0.8rem;">
+                🤖 Telegram Botda bron
+            </a>
+        </div>
+    </div>
+
+    <!-- Background Hotel Video Loop -->
+    <video 
+        class="video-hero-bg" 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        webkit-playsinline
+        poster="/static/images/exterior_night.jpg">
+        <source src="/static/videos/hotel_tour.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-overlay"></div>
+
+    <!-- Centered Cinematic Hero Content -->
+    <main class="home-hero">
+        <div class="video-hero-content">
+            <div class="status-pill">
+                <span class="pulse-dot"></span>
+                <span>Samarqand Markazida • Shohi Zinda • 24/7 Ochiq</span>
+            </div>
+
+            <h1 class="hero-title">
+                SAM REST <span class="gradient-text">HOSTEL</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Samarqand shahrining tarixiy markazidagi eng shinam, zamonaviy va arzon narxlardagi hostel.
+            </p>
+        </div>
+    </main>
+
+    <!-- Minimal Home Footer -->
+    <footer class="home-footer">
+        <p>&copy; 2026 <strong>Sam Rest Hostel</strong> (Sam Rest Mehmonxonasi). Samarqand shahri, Shohi Zinda koʻchasi • Tel: <a href="tel:+998880110055" style="color: var(--primary); text-decoration: none; font-weight: 700;">+998 88 011 00 55</a></p>
+    </footer>
+
+    <!-- Mobile Floating Bottom Bar -->
+    <div class="mobile-bottom-bar">
+        <a href="tel:+998880110055" class="bottom-bar-btn call">
+            <span class="icon">📞</span>
+            <span>Qoʻngʻiroq</span>
+        </a>
+        <a href="/rooms" class="bottom-bar-btn rooms">
+            <span class="icon">🛏</span>
+            <span>Xonalar</span>
+        </a>
+        <a href="https://t.me/Sam_rest_hotelbot" target="_blank" class="bottom-bar-btn tg">
+            <span class="icon">🤖</span>
+            <span>Telegram</span>
+        </a>
+    </div>
+
+    <script src="/static/js/mobile.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 40) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
