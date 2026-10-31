@@ -1349,24 +1349,48 @@ footer strong {
 /* Responsive */
 @media (max-width: 992px) {
     .contact-grid { grid-template-columns: 1fr; }
-    .hero-title { font-size: 2.8rem; }
+    .hero-title { font-size: 2.4rem; }
+}
+
+@media (max-width: 860px) {
     .quick-booking-bar {
-        grid-template-columns: 1fr 1fr;
-        max-width: 620px;
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+        padding: 1.2rem !important;
+        max-width: 100% !important;
+    }
+    .quick-booking-bar .booking-field {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    .quick-booking-bar .booking-field select,
+    .quick-booking-bar .booking-field input {
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 48px !important;
+        box-sizing: border-box !important;
+        font-size: 16px !important;
     }
     .quick-booking-bar .btn-calc-book {
-        grid-column: span 2;
-        width: 100%;
+        grid-column: span 1 !important;
+        width: 100% !important;
+        height: 48px !important;
+        margin-top: 0.3rem !important;
     }
 }
 
 @media (max-width: 768px) {
     body {
-        padding-bottom: 75px;
+        padding-bottom: 85px !important;
     }
 
     header {
-        padding: 0.85rem 1.2rem;
+        padding: 0.75rem 1.2rem !important;
+    }
+
+    /* Clean mobile header: ONLY logo on left, ONLY hamburger on right */
+    header .btn-telegram {
+        display: none !important;
     }
 
     .desktop-nav {
@@ -1374,67 +1398,139 @@ footer strong {
     }
 
     .menu-toggle {
-        display: flex;
-    }
-
-    .btn-telegram span {
-        display: none;
-    }
-
-    .btn-telegram {
-        padding: 0.5rem;
-        border-radius: 50%;
+        display: flex !important;
     }
 
     .mobile-bottom-bar {
-        display: flex;
+        display: flex !important;
+        padding: 0.45rem 0.8rem calc(0.45rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    .bottom-bar-btn {
+        padding: 0.35rem 0.3rem !important;
+        font-size: 0.72rem !important;
+    }
+
+    .bottom-bar-btn .icon {
+        font-size: 1.15rem !important;
+    }
+
+    /* Home hero clean compact mobile layout */
+    .home-hero {
+        min-height: calc(100vh - 130px) !important;
+        padding: 4.5rem 1rem 2rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .status-pill {
+        font-size: 0.72rem !important;
+        padding: 0.35rem 0.75rem !important;
+        margin-bottom: 0.9rem !important;
+        letter-spacing: 0.5px !important;
+        line-height: 1.4 !important;
     }
 
     .hero-title {
-        font-size: 2.2rem !important;
+        font-size: 1.85rem !important;
+        margin-bottom: 0.8rem !important;
+        line-height: 1.2 !important;
     }
 
+    .hero-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.5 !important;
+        max-width: 95% !important;
+    }
+
+    .home-footer {
+        padding: 1rem 1rem 6rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Page Hero on mobile */
     .page-hero {
-        padding: 6.5rem 1.2rem 2.8rem;
+        padding: 5.5rem 1.2rem 2.2rem !important;
     }
 
     .page-hero-title {
-        font-size: 2rem !important;
+        font-size: 1.85rem !important;
     }
 
-    .quick-booking-bar {
-        grid-template-columns: 1fr;
-        padding: 1.2rem;
+    .page-hero-subtitle {
+        font-size: 0.95rem !important;
     }
 
-    .booking-field select,
-    .booking-field input {
-        font-size: 16px !important; /* Prevents auto zoom in iOS Safari */
+    /* Instagram card mobile layout */
+    .instagram-box {
+        padding: 1.5rem 1.2rem !important;
+        margin-top: 2rem !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        align-items: center !important;
+        gap: 1.2rem !important;
+    }
+
+    .instagram-info {
+        flex-direction: column !important;
+        text-align: center !important;
+        align-items: center !important;
+        gap: 0.8rem !important;
+    }
+
+    .instagram-info img,
+    .instagram-avatar {
+        width: 68px !important;
+        height: 68px !important;
+        min-width: 68px !important;
+        min-height: 68px !important;
+        max-width: 68px !important;
+        max-height: 68px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        aspect-ratio: 1 / 1 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .instagram-text h3 {
+        justify-content: center !important;
+    }
+
+    .btn-instagram {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 0.75rem 1.2rem !important;
+        font-size: 0.95rem !important;
     }
 
     .rules-card {
-        flex-direction: column;
-        padding: 1.4rem;
-        gap: 1.2rem;
+        flex-direction: column !important;
+        padding: 1.4rem !important;
+        gap: 1.2rem !important;
     }
 
     .rules-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .rooms-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .video-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .contact-info {
-        padding: 1.8rem 1.2rem;
+        padding: 1.8rem 1.2rem !important;
     }
 
     .map-wrapper {
-        min-height: 320px;
+        min-height: 320px !important;
+    }
+
+    footer {
+        padding: 2.5rem 1rem 6rem !important;
     }
 }
