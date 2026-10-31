@@ -43,9 +43,9 @@ async def main():
     # Load environment variables
     load_dotenv()
 
-    bot_token = os.getenv("BOT_TOKEN")
-    api_base_url = os.getenv("API_BASE_URL", "http://localhost:8000")
-    api_key = os.getenv("API_KEY")
+    bot_token = os.getenv("BOT_TOKEN") or "9134381937:AAFRc5qcuIzAURuBg5PifRJRUl2crzjXyZk"
+    api_base_url = os.getenv("API_BASE_URL") or "http://127.0.0.1:8000"
+    api_key = os.getenv("API_KEY") or "hotel_secret_api_key_123"
     raw_admin_ids = os.getenv("ADMIN_IDS", "")
 
     if not bot_token:

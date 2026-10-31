@@ -4,11 +4,14 @@ import subprocess
 from multiprocessing import Process
 import uvicorn
 
-# Ensure defaults for server deployment
 PORT = int(os.environ.get("PORT", 8000))
-os.environ.setdefault("BOT_TOKEN", "9134381937:AAFRc5qcuIzAURuBg5PifRJRUl2crzjXyZk")
-os.environ.setdefault("API_KEY", "hotel_secret_api_key_123")
-os.environ.setdefault("API_BASE_URL", f"http://127.0.0.1:{PORT}")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "9134381937:AAFRc5qcuIzAURuBg5PifRJRUl2crzjXyZk")
+API_KEY = os.environ.get("API_KEY", "hotel_secret_api_key_123")
+API_BASE_URL = os.environ.get("API_BASE_URL", f"http://127.0.0.1:{PORT}")
+
+os.environ["BOT_TOKEN"] = BOT_TOKEN
+os.environ["API_KEY"] = API_KEY
+os.environ["API_BASE_URL"] = API_BASE_URL
 
 def run_api():
     """Runs the FastAPI website server."""
@@ -17,9 +20,12 @@ def run_api():
     uvicorn.run(app, host="0.0.0.0", port=PORT)
 
 def run_bot():
-    """Runs the Telegram bot with current environment."""
+    """Runs the Telegram bot."""
     bot_script = os.path.abspath("bot/bot.py")
     env = os.environ.copy()
+    env["BOT_TOKEN"] = BOT_TOKEN
+    env["API_KEY"] = API_KEY
+    env["API_BASE_URL"] = API_BASE_URL
     subprocess.run([sys.executable, bot_script], env=env)
 
 if __name__ == "__main__":
