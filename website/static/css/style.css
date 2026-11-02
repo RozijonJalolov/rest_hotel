@@ -154,6 +154,26 @@ nav a.nav-link.active::after {
     width: 100%;
 }
 
+.btn-header-phone {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #ffffff !important;
+    padding: 0.6rem 1.3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+    transition: var(--transition);
+}
+
+.btn-header-phone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
+}
+
 .btn-telegram {
     background: linear-gradient(135deg, #229ed9, #0088cc);
     color: #ffffff !important;
@@ -1346,6 +1366,12 @@ footer strong {
     border: 1px solid rgba(34, 158, 217, 0.4);
 }
 
+.bottom-bar-btn.map {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .contact-grid { grid-template-columns: 1fr; }
@@ -1389,6 +1415,7 @@ footer strong {
     }
 
     /* Clean mobile header: ONLY logo on left, ONLY hamburger on right */
+    header .btn-header-phone,
     header .btn-telegram {
         display: none !important;
     }
