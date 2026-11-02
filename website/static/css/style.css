@@ -1134,120 +1134,223 @@ nav a.nav-link.active::after {
     transform: translateX(4px);
 }
 
-/* Map Provider Badges & Buttons */
-.map-buttons-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.4rem;
-}
-
-.map-btn {
+/* Map Picker Modal */
+.btn-open-map-modal {
+    background: rgba(230, 57, 70, 0.12);
+    border: 1px solid rgba(230, 57, 70, 0.35);
+    padding: 0.65rem 1.1rem;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.45rem 0.85rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
     text-decoration: none;
-    transition: all 0.2s ease;
-    border: 1px solid var(--border-glass);
-    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.25s ease;
+}
+
+.btn-open-map-modal:hover {
+    background: var(--primary);
+    border-color: var(--primary);
     color: #ffffff;
-}
-
-.map-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
 }
 
-.map-btn.yandex {
-    border-color: rgba(255, 51, 51, 0.4);
-    background: rgba(255, 51, 51, 0.12);
-    color: #ff6b6b;
-}
-.map-btn.yandex:hover {
-    background: rgba(255, 51, 51, 0.25);
-    color: #fff;
-    border-color: #ff3333;
-}
-
-.map-btn.google {
-    border-color: rgba(66, 133, 244, 0.4);
-    background: rgba(66, 133, 244, 0.12);
-    color: #6ba4ff;
-}
-.map-btn.google:hover {
-    background: rgba(66, 133, 244, 0.25);
-    color: #fff;
-    border-color: #4285f4;
+.map-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.map-btn.twogis {
-    border-color: rgba(34, 197, 94, 0.4);
-    background: rgba(34, 197, 94, 0.12);
-    color: #4ade80;
-}
-.map-btn.twogis:hover {
-    background: rgba(34, 197, 94, 0.25);
-    color: #fff;
-    border-color: #22c55e;
+.map-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
 }
 
-.map-btn.apple {
-    border-color: rgba(160, 160, 160, 0.4);
-    background: rgba(255, 255, 255, 0.08);
-    color: #e2e8f0;
-}
-.map-btn.apple:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    border-color: #ffffff;
+.map-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 92%;
+    max-width: 460px;
+    background: linear-gradient(145deg, #181418, #0e1118);
+    border: 1px solid rgba(230, 57, 70, 0.4);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(230, 57, 70, 0.15);
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
+    overflow: hidden;
 }
 
-.map-toolbar {
+.map-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.map-modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.65rem 1rem;
-    background: rgba(18, 20, 28, 0.95);
+    padding: 1.3rem 1.5rem;
     border-bottom: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.02);
 }
 
-.map-toolbar-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-dim);
-}
-
-.map-tabs {
+.map-modal-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.15);
+    border: 1px solid rgba(230, 57, 70, 0.4);
     display: flex;
-    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
 }
 
-.map-tab {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--border-glass);
+.map-modal-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.map-modal-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+}
+
+.map-modal-close {
+    background: none;
+    border: none;
     color: var(--text-muted);
-    padding: 0.35rem 0.8rem;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1;
     cursor: pointer;
+    padding: 0.2rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.map-modal-close:hover {
+    color: #ffffff;
+    transform: rotate(90deg);
+}
+
+.map-modal-body {
+    padding: 1.2rem 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.map-choice-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-glass);
+    text-decoration: none;
     transition: all 0.2s ease;
+    color: inherit;
 }
 
-.map-tab:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+.map-choice-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(4px);
 }
 
-.map-tab.active {
-    background: var(--primary);
-    border-color: var(--primary);
+.map-choice-card.yandex:hover {
+    border-color: rgba(255, 51, 51, 0.5);
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.15);
+}
+
+.map-choice-card.google:hover {
+    border-color: rgba(66, 133, 244, 0.5);
+    box-shadow: 0 0 20px rgba(66, 133, 244, 0.15);
+}
+
+.map-choice-card.twogis:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+}
+
+.map-choice-card.apple:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+.map-choice-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.map-choice-info {
+    flex: 1;
+}
+
+.map-choice-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.map-choice-desc {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+}
+
+.map-choice-arrow {
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.map-choice-card:hover .map-choice-arrow {
     color: #fff;
-    box-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+    transform: translateX(3px);
+}
+
+@media (max-width: 500px) {
+    .map-modal {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        transform: translateY(100%);
+        width: 100%;
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+    }
+    .map-modal.active {
+        transform: translateY(0);
+    }
 }
 
 .map-wrapper {

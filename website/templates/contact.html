@@ -97,26 +97,9 @@
                     <div class="info-details">
                         <h4>Mehmonxona Manzili</h4>
                         <p>Samarqand shahri, Shohi Zinda koʻchasi (BURHAN oshi yonida)</p>
-                        
-                        <div style="margin-top: 0.9rem;">
-                            <div style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.4rem; font-weight: 600;">
-                                Oʻzingizga qulay xaritada ochish:
-                            </div>
-                            <div class="map-buttons-grid">
-                                <a href="https://yandex.uz/maps/?text=Samarkand+Shohi+Zinda+Sam+Rest+Hotel" target="_blank" class="map-btn yandex">
-                                    <span style="font-weight: 800;">🔴 Yandex</span> Maps
-                                </a>
-                                <a href="https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand" target="_blank" class="map-btn google">
-                                    <span style="font-weight: 800;">🔵 Google</span> Maps
-                                </a>
-                                <a href="https://2gis.uz/samarkand/search/Shohi%20Zinda%20Samarkand" target="_blank" class="map-btn twogis">
-                                    <span style="font-weight: 800;">🟢 2GIS</span> Xarita
-                                </a>
-                                <a href="https://maps.apple.com/?q=SAM+REST+HOTEL+Samarkand" target="_blank" class="map-btn apple">
-                                    <span style="font-weight: 800;">🍏 Apple</span> Maps
-                                </a>
-                            </div>
-                        </div>
+                        <button type="button" class="btn-open-map-modal" onclick="openMapModal()">
+                            📍 Xaritada koʻrish va yoʻnalish olish ↗
+                        </button>
                     </div>
                 </div>
 
@@ -160,15 +143,8 @@
                 </div>
             </div>
 
-            <!-- Interactive Map Wrapper with Direct Switcher -->
+            <!-- Interactive Map Wrapper -->
             <div class="map-wrapper">
-                <div class="map-toolbar">
-                    <span class="map-toolbar-label">Jonli xarita:</span>
-                    <div class="map-tabs">
-                        <button type="button" class="map-tab active" id="tabYandex" onclick="switchMap('yandex')">🔴 Yandex</button>
-                        <button type="button" class="map-tab" id="tabGoogle" onclick="switchMap('google')">🔵 Google</button>
-                    </div>
-                </div>
                 <iframe 
                     id="hotelMapIframe"
                     src="https://yandex.ru/map-widget/v1/?text=SAM+REST+HOTEL+Samarkand+Shohi+Zinda&z=17" 
@@ -179,6 +155,67 @@
         </div>
     </section>
 
+    <!-- Map Selection Modal -->
+    <div class="map-modal-backdrop" id="mapModalBackdrop" onclick="closeMapModal()"></div>
+    <div class="map-modal" id="mapModal" role="dialog" aria-modal="true">
+        <div class="map-modal-header">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <div class="map-modal-icon">📍</div>
+                <div>
+                    <h3 class="map-modal-title">Xaritani tanlang</h3>
+                    <p class="map-modal-subtitle">Oʻzingizga qulay xarita ilovasida oching:</p>
+                </div>
+            </div>
+            <button type="button" class="map-modal-close" onclick="closeMapModal()" aria-label="Yopish">&times;</button>
+        </div>
+        
+        <div class="map-modal-body">
+            <a href="https://yandex.uz/maps/?text=Samarkand+Shohi+Zinda+Sam+Rest+Hotel" target="_blank" class="map-choice-card yandex" onclick="closeMapModal()">
+                <div class="map-choice-icon" style="background: rgba(255, 51, 51, 0.15); color: #ff4d4d; border-color: rgba(255, 51, 51, 0.4);">
+                    🔴
+                </div>
+                <div class="map-choice-info">
+                    <div class="map-choice-name">Yandex Maps & Navigator</div>
+                    <div class="map-choice-desc">Yandex xaritasi yoki navigatorda ochish</div>
+                </div>
+                <span class="map-choice-arrow">→</span>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand" target="_blank" class="map-choice-card google" onclick="closeMapModal()">
+                <div class="map-choice-icon" style="background: rgba(66, 133, 244, 0.15); color: #4285f4; border-color: rgba(66, 133, 244, 0.4);">
+                    🔵
+                </div>
+                <div class="map-choice-info">
+                    <div class="map-choice-name">Google Maps</div>
+                    <div class="map-choice-desc">Google xaritalar ilovasida ochish</div>
+                </div>
+                <span class="map-choice-arrow">→</span>
+            </a>
+
+            <a href="https://2gis.uz/samarkand/search/Shohi%20Zinda%20Samarkand" target="_blank" class="map-choice-card twogis" onclick="closeMapModal()">
+                <div class="map-choice-icon" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border-color: rgba(34, 197, 94, 0.4);">
+                    🟢
+                </div>
+                <div class="map-choice-info">
+                    <div class="map-choice-name">2GIS (2ГИС)</div>
+                    <div class="map-choice-desc">2GIS xaritasida yoʻnalish olish</div>
+                </div>
+                <span class="map-choice-arrow">→</span>
+            </a>
+
+            <a href="https://maps.apple.com/?q=SAM+REST+HOTEL+Samarkand" target="_blank" class="map-choice-card apple" onclick="closeMapModal()">
+                <div class="map-choice-icon" style="background: rgba(255, 255, 255, 0.1); color: #fff; border-color: rgba(255, 255, 255, 0.3);">
+                    🍏
+                </div>
+                <div class="map-choice-info">
+                    <div class="map-choice-name">Apple Maps</div>
+                    <div class="map-choice-desc">iPhone va iPad Apple xaritalarida ochish</div>
+                </div>
+                <span class="map-choice-arrow">→</span>
+            </a>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 <strong>Sam Rest Hostel</strong> (Sam Rest Mehmonxonasi). Barcha huquqlar himoyalangan.</p>
@@ -188,21 +225,21 @@
     </footer>
 
     <script>
-        function switchMap(provider) {
-            const iframe = document.getElementById('hotelMapIframe');
-            const tabY = document.getElementById('tabYandex');
-            const tabG = document.getElementById('tabGoogle');
-            
-            if (provider === 'yandex') {
-                iframe.src = "https://yandex.ru/map-widget/v1/?text=SAM+REST+HOTEL+Samarkand+Shohi+Zinda&z=17";
-                tabY.classList.add('active');
-                tabG.classList.remove('active');
-            } else {
-                iframe.src = "https://maps.google.com/maps?q=SAM+REST+HOTEL,+Samarkand&hl=uz&z=17&output=embed";
-                tabG.classList.add('active');
-                tabY.classList.remove('active');
-            }
+        function openMapModal() {
+            document.getElementById('mapModal').classList.add('active');
+            document.getElementById('mapModalBackdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+
+        function closeMapModal() {
+            document.getElementById('mapModal').classList.remove('active');
+            document.getElementById('mapModalBackdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMapModal();
+        });
 
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
