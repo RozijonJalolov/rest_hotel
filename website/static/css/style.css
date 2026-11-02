@@ -1134,11 +1134,129 @@ nav a.nav-link.active::after {
     transform: translateX(4px);
 }
 
+/* Map Provider Badges & Buttons */
+.map-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+}
+
+.map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-glass);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.map-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.map-btn.yandex {
+    border-color: rgba(255, 51, 51, 0.4);
+    background: rgba(255, 51, 51, 0.12);
+    color: #ff6b6b;
+}
+.map-btn.yandex:hover {
+    background: rgba(255, 51, 51, 0.25);
+    color: #fff;
+    border-color: #ff3333;
+}
+
+.map-btn.google {
+    border-color: rgba(66, 133, 244, 0.4);
+    background: rgba(66, 133, 244, 0.12);
+    color: #6ba4ff;
+}
+.map-btn.google:hover {
+    background: rgba(66, 133, 244, 0.25);
+    color: #fff;
+    border-color: #4285f4;
+}
+
+.map-btn.twogis {
+    border-color: rgba(34, 197, 94, 0.4);
+    background: rgba(34, 197, 94, 0.12);
+    color: #4ade80;
+}
+.map-btn.twogis:hover {
+    background: rgba(34, 197, 94, 0.25);
+    color: #fff;
+    border-color: #22c55e;
+}
+
+.map-btn.apple {
+    border-color: rgba(160, 160, 160, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+}
+.map-btn.apple:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: #ffffff;
+}
+
+.map-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1rem;
+    background: rgba(18, 20, 28, 0.95);
+    border-bottom: 1px solid var(--border-glass);
+}
+
+.map-toolbar-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dim);
+}
+
+.map-tabs {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.map-tab {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-glass);
+    color: var(--text-muted);
+    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.map-tab:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.map-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
+}
+
 .map-wrapper {
     position: relative;
     width: 100%;
     min-height: 420px;
     background: #111;
+    display: flex;
+    flex-direction: column;
 }
 
 .map-wrapper iframe {

@@ -29,6 +29,8 @@ HOTEL_DATA = {
     "phone": "+998880110055",
     "address": "Samarqand shahri, Shohi Zinda koʻchasi (BURHAN oshi yonida)",
     "map_link": "https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand",
+    "yandex_map_link": "https://yandex.uz/maps/?text=Samarkand+Shohi+Zinda+Sam+Rest+Hotel",
+    "twogis_map_link": "https://2gis.uz/samarkand/search/Shohi%20Zinda%20Samarkand",
     "checkin_time": "14:00",
     "checkout_time": "12:00",
     "hours": "24/7",

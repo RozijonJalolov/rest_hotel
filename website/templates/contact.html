@@ -97,9 +97,26 @@
                     <div class="info-details">
                         <h4>Mehmonxona Manzili</h4>
                         <p>Samarqand shahri, Shohi Zinda koʻchasi (BURHAN oshi yonida)</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand" target="_blank" style="color: var(--primary); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: inline-block; margin-top: 0.5rem;">
-                            📍 Google Xaritada koʻrish va yoʻnalish olish ↗
-                        </a>
+                        
+                        <div style="margin-top: 0.9rem;">
+                            <div style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.4rem; font-weight: 600;">
+                                Oʻzingizga qulay xaritada ochish:
+                            </div>
+                            <div class="map-buttons-grid">
+                                <a href="https://yandex.uz/maps/?text=Samarkand+Shohi+Zinda+Sam+Rest+Hotel" target="_blank" class="map-btn yandex">
+                                    <span style="font-weight: 800;">🔴 Yandex</span> Maps
+                                </a>
+                                <a href="https://www.google.com/maps/search/?api=1&query=SAM+REST+HOTEL+Samarkand" target="_blank" class="map-btn google">
+                                    <span style="font-weight: 800;">🔵 Google</span> Maps
+                                </a>
+                                <a href="https://2gis.uz/samarkand/search/Shohi%20Zinda%20Samarkand" target="_blank" class="map-btn twogis">
+                                    <span style="font-weight: 800;">🟢 2GIS</span> Xarita
+                                </a>
+                                <a href="https://maps.apple.com/?q=SAM+REST+HOTEL+Samarkand" target="_blank" class="map-btn apple">
+                                    <span style="font-weight: 800;">🍏 Apple</span> Maps
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -143,10 +160,18 @@
                 </div>
             </div>
 
-            <!-- Interactive Map Wrapper -->
+            <!-- Interactive Map Wrapper with Direct Switcher -->
             <div class="map-wrapper">
+                <div class="map-toolbar">
+                    <span class="map-toolbar-label">Jonli xarita:</span>
+                    <div class="map-tabs">
+                        <button type="button" class="map-tab active" id="tabYandex" onclick="switchMap('yandex')">🔴 Yandex</button>
+                        <button type="button" class="map-tab" id="tabGoogle" onclick="switchMap('google')">🔵 Google</button>
+                    </div>
+                </div>
                 <iframe 
-                    src="https://maps.google.com/maps?q=SAM+REST+HOTEL,+Samarkand&hl=uz&z=17&output=embed" 
+                    id="hotelMapIframe"
+                    src="https://yandex.ru/map-widget/v1/?text=SAM+REST+HOTEL+Samarkand+Shohi+Zinda&z=17" 
                     allowfullscreen="" 
                     loading="lazy">
                 </iframe>
@@ -163,6 +188,22 @@
     </footer>
 
     <script>
+        function switchMap(provider) {
+            const iframe = document.getElementById('hotelMapIframe');
+            const tabY = document.getElementById('tabYandex');
+            const tabG = document.getElementById('tabGoogle');
+            
+            if (provider === 'yandex') {
+                iframe.src = "https://yandex.ru/map-widget/v1/?text=SAM+REST+HOTEL+Samarkand+Shohi+Zinda&z=17";
+                tabY.classList.add('active');
+                tabG.classList.remove('active');
+            } else {
+                iframe.src = "https://maps.google.com/maps?q=SAM+REST+HOTEL,+Samarkand&hl=uz&z=17&output=embed";
+                tabG.classList.add('active');
+                tabY.classList.remove('active');
+            }
+        }
+
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 40) {
